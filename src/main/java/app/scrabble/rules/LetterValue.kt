@@ -3,11 +3,11 @@ package app.scrabble.rules
 import app.scrabble.word.Score
 import app.scrabble.word.Word
 
-class LetterValue : Rules {
+class LetterValue : Rule {
 
-    override fun calculateScore(word: Word): Score = Score(points = word.value.toList().map { getLetterScore(it) }.sum())
+    override fun calculateScore(word: Word): Score = Score(points = word.value.toList().sumOf { it.score() })
 
-    private fun getLetterScore(character: Char): Int = when (character.uppercaseChar()) {
+    private fun Char.score(): Int = when (this.uppercaseChar()) {
         'A', 'E', 'I', 'L', 'N', 'O', 'R', 'S', 'T', 'U' -> 1
         'D', 'G' -> 2
         'B', 'C', 'M', 'P' -> 3
