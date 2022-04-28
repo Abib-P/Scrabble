@@ -1,11 +1,7 @@
 package app.scrabble.word
 
-data class Word(val value: String) {
-    var points = 0
-    var multiplicator = 1
-    var bonus = 0
-
-    fun getScore(): Int {
-        return (points * multiplicator) + bonus
+data class Word(val value: String){
+    init {
+        require(value.isNotBlank()) { "The word must contain something" }
     }
 }

@@ -1,5 +1,6 @@
 package app.scrabble.rules
 
+import app.scrabble.word.Score
 import app.scrabble.word.Word
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.DynamicTest
@@ -19,9 +20,9 @@ internal class LetterValueTest {
     fun `should calculate the value of words`(input: String, expected: Int) {
         val word = Word(input)
 
-        letterValue.applyRule(word)
+        val score = letterValue.calculateScore(word)
 
-        assertEquals(expected, word.points)
+        assertEquals(Score(points = expected), score)
     }
 
     @TestFactory
@@ -34,9 +35,9 @@ internal class LetterValueTest {
                 DynamicTest.dynamicTest("when I calculate the value of $input then I get $expected") {
                     val word = Word(input)
 
-                    letterValue.applyRule(word)
+                    val score = letterValue.calculateScore(word)
 
-                    assertEquals(expected, word.points)
+                    assertEquals(Score(points = expected), score)
                 }
             }
 }

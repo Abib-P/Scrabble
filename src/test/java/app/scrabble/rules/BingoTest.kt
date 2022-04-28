@@ -1,5 +1,6 @@
 package app.scrabble.rules
 
+import app.scrabble.word.Score
 import app.scrabble.word.Word
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
@@ -10,19 +11,20 @@ internal class BingoTest {
     @Test
     fun `should apply a x2 bonus when all letter are used once`() {
         val word = Word("Paul")
-        word.points = 0
 
-        bingo.applyRule(word)
+        val score = bingo.calculateScore(word)
 
-        assertEquals(0, word.getScore())
+        val expectedScore = Score(bonus = 0)
+        assertEquals(expectedScore, score)
     }
 
     @Test
     fun `should not apply a x2 bonus when all letter are used more than once`() {
         val word = Word("Paulabi")
 
-        bingo.applyRule(word)
+        val score = bingo.calculateScore(word)
 
-        assertEquals(50, word.getScore())
+        val expectedScore = Score(bonus = 50)
+        assertEquals(expectedScore, score)
     }
 }

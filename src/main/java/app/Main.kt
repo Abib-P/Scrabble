@@ -4,6 +4,6 @@ import app.scrabble.game.Scrabble
 import app.scrabble.word.Word
 
 fun main() {
-    val game = Scrabble()
-    println(game.applyRules(Word("Paul")))
+    val game = Scrabble.scrabbleWithDefaultRules()
+    println(game.computeScore(Word("Paul")).compute())
 }

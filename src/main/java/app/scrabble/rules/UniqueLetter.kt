@@ -1,11 +1,13 @@
 package app.scrabble.rules
 
+import app.scrabble.word.Score
 import app.scrabble.word.Word
 
 class UniqueLetter : Rules {
-    override fun applyRule(word: Word) {
+    override fun calculateScore(word: Word): Score {
         if (word.value.uppercase().toList().distinct().size == word.value.length) {
-            word.multiplicator *= 2
+            return Score(multiplicator = 2)
         }
+        return Score()
     }
 }
